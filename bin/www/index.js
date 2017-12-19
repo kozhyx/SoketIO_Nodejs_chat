@@ -6,6 +6,7 @@ var nicknames=[];
 app.get('/', function(req, res){
     res.sendFile(__dirname + '/index.html');
 });
+var port = process.env.PORT || 8080;
 
 io.on('connection', function(socket){
     socket.on('new user',function (data,callback) {
@@ -45,6 +46,4 @@ io.on('connection', function(socket){
 
 
 
-http.listen(3000,'192.168.11.23', function(){
-    console.log('listening on *:3000');
-});
+http.listen(port);
