@@ -5,311 +5,454 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Title</title>
+    <title>Chat</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
           integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Чат</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-
-
-        </ul>
-    </div>
-</nav>
 <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-<style>
-    #logB{
-        margin-top: 10px;
-    }
-    .ass{
-        padding-top: 1%;
-    }
-    #messages{
-        min-height: 400px;
-        height: 100%;
-    }
-    #contentWrap {display: none;}
-    .wrapper {
-        margin-top: 80px;
-        margin-bottom: 20px;
-    }
-    .form-signin {
-        max-width: 420px;
-        padding: 30px 38px 66px;
-        margin: 0 auto;
-        background-color: #eee;
-        border: 3px dotted rgba(0,0,0,0.1);
-    }
-    .form-signin-heading {
-        text-align:center;
-        margin-bottom: 30px;
-    }
-    .form-control {
-        position: relative;
-        font-size: 16px;
-        height: auto;
-        padding: 10px;
-    }
-    input[type="text"] {
-        margin-bottom: 0px;
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
-    }
-    input[type="password"] {
-        margin-bottom: 20px;
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
-    }
-    .colorgraph {
-        height: 7px;
-        border-top: 0;
-        background: #c4e17f;
-        border-radius: 5px;
-        background-image: -webkit-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
-        background-image: -moz-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
-        background-image: -o-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
-        background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
-    }
-    #contentWrap{
-        margin-top: 5%;
-    }
-    .conversation-wrap
-    {
-        box-shadow: -2px 0 3px #ddd;
-        padding:0;
-        max-height: 400px;
-        overflow: auto;
-    }
-    .conversation
-    {
-        padding:5px;
-        border-bottom:1px solid #ddd;
-        margin:0;
+<style class="cp-pen-styles">@import url(https://fonts.googleapis.com/css?family=Raleway:400,700);
+html, body {
+    height: 100%;
+    margin: 0;
+}
+#contentWrap{display: none}
+.chat_window {
+    position: absolute;
+    width: calc(100% - 20px);
+    max-width: 800px;
+    height: 500px;
+    border-radius: 10px;
+    background-color: #fff;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    background-color: #f8f8f8;
+    overflow: hidden;
+}
 
-    }
+.top_menu {
+    background-color: #fff;
+    width: 100%;
+    padding: 20px 0 15px;
+    box-shadow: 0 1px 30px rgba(0, 0, 0, 0.1);
+}
+.top_menu .buttons {
+    margin: 3px 0 0 20px;
+    position: absolute;
+}
+.top_menu .buttons .button {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 10px;
+    position: relative;
+}
+.top_menu .buttons .button.close {
+    background-color: #f5886e;
+}
+.top_menu .buttons .button.minimize {
+    background-color: #fdbf68;
+}
+.top_menu .buttons .button.maximize {
+    background-color: #a3d063;
+}
+.top_menu .title {
+    text-align: center;
+    color: #bcbdc0;
+    font-size: 20px;
+}
 
-    .message-wrap
-    {
-        box-shadow: 0 0 3px #ddd;
-        padding:0;
+.messages {
+    position: relative;
+    list-style: none;
+    padding: 20px 10px 0 10px;
+    margin: 0;
+    height: 347px;
+    overflow: scroll;
+}
+.messages .message {
+    clear: both;
+    overflow: hidden;
+    margin-bottom: 20px;
+    transition: all 0.5s linear;
+    opacity: 0;
+}
+.messages .message.left .avatar {
+    background-color: #f5886e;
+    float: left;
+}
+.messages .message.left .text_wrapper {
+    background-color: #ffe6cb;
+    margin-left: 20px;
+}
+.messages .message.left .text_wrapper::after, .messages .message.left .text_wrapper::before {
+    right: 100%;
+    border-right-color: #ffe6cb;
+}
+.messages .message.left .text {
+    color: #c48843;
+}
+.messages .message.right .avatar {
+    background-color: #fdbf68;
+    float: right;
+}
+.messages .message.right .text_wrapper {
+    background-color: #c7eafc;
+    margin-right: 20px;
+    float: right;
+}
+.messages .message.right .text_wrapper::after, .messages .message.right .text_wrapper::before {
+    left: 100%;
+    border-left-color: #c7eafc;
+}
+.messages .message.right .text {
+    color: #45829b;
+}
+.messages .message.appeared {
+    opacity: 1;
+}
+.messages .message .avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: inline-block;
+}
+.messages .message .text_wrapper {
+    display: inline-block;
+    padding: 20px;
+    border-radius: 6px;
+    width: calc(100% - 85px);
+    min-width: 100px;
+    position: relative;
+}
+.messages .message .text_wrapper::after, .messages .message .text_wrapper:before {
+    top: 18px;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+}
+.messages .message .text_wrapper::after {
+    border-width: 13px;
+    margin-top: 0px;
+}
+.messages .message .text_wrapper::before {
+    border-width: 15px;
+    margin-top: -2px;
+}
+.messages .message .text_wrapper .text {
+    font-size: 18px;
+    font-weight: 300;
+}
 
-    }
-    .msg
-    {
-        padding:5px;
-        /*border-bottom:1px solid #ddd;*/
-        margin:0;
-    }
-    .msg-wrap
-    {
-        padding:10px;
-        max-height: 400px;
-        overflow: auto;
+.bottom_wrapper {
+    position: relative;
+    width: 100%;
+    background-color: #fff;
+    padding: 20px 20px;
+    position: absolute;
+    bottom: 0;
+}
+.bottom_wrapper .message_input_wrapper {
+    display: inline-block;
+    height: 50px;
+    border-radius: 25px;
+    border: 1px solid #bcbdc0;
+    width: calc(100% - 160px);
+    position: relative;
+    padding: 0 20px;
+}
+.bottom_wrapper .message_input_wrapper .message_input {
+    border: none;
+    height: 100%;
+    box-sizing: border-box;
+    width: calc(100% - 40px);
+    position: absolute;
+    outline-width: 0;
+    color: gray;
+}
+.bottom_wrapper .send_message {
+    width: 140px;
+    height: 50px;
+    display: inline-block;
+    border-radius: 50px;
+    background-color: #a3d063;
+    border: 2px solid #a3d063;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.2s linear;
+    text-align: center;
+    float: right;
+}
+.bottom_wrapper .send_message:hover {
+    color: #a3d063;
+    background-color: #fff;
+}
+.bottom_wrapper .send_message .text {
+    font-size: 18px;
+    font-weight: 300;
+    display: inline-block;
+    line-height: 48px;
+}
 
-    }
+.message_template {
+    display: none;
+}
 
-    .time
-    {
-        color:#bfbfbf;
-    }
+body {
+    font-family: 'Raleway', sans-serif;
 
-    .send-wrap
-    {
-        border-top: 1px solid #eee;
-        border-bottom: 1px solid #eee;
-        padding:10px;
-        /*background: #f8f8f8;*/
-    }
+    color: #435757;
+    background: -webkit-linear-gradient(110deg, #d0b782 20%, #a0cecf 80%);
+    background: linear-gradient(-20deg, #d0b782 20%, #a0cecf 80%);
+    -webkit-font-smoothing: antialiased;
+}
 
-    .send-message
-    {
-        resize: none;
-    }
+:focus {
+    outline: 0;
+}
 
-    .highlight
-    {
-        background-color: #f7f7f9;
-        border: 1px solid #e1e1e8;
-    }
+#nickWrap {
+    -webkit-perspective: 500px;
+    perspective: 500px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    text-align: center;
+    -webkit-transform: translate3d(-50%, -50%, 0);
+    transform: translate3d(-50%, -50%, 0);
+}
 
-    .send-message-btn
-    {
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
-        border-bottom-left-radius: 0;
+h1 {
+    color: #416171;
+    font-size: 43px;
+    margin: 0;
+}
 
-        border-bottom-right-radius: 0;
-    }
-    .btn-panel
-    {
-        background: #f7f7f9;
-    }
+h2 {
+    color: #349E97;
+    margin: 0;
+}
 
-    .btn-panel .btn
-    {
-        color:#b8b8b8;
+form {
+    margin: 35px 0;
+}
 
-        transition: 0.2s all ease-in-out;
-    }
+#inputs {
+    height: 127px;
+    -webkit-transition: height .5s ease-in-out;
+    transition: height .5s ease-in-out;
+}
+#inputs div {
+    height: 41px;
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    -webkit-transition: -webkit-transform .5s ease-in-out;
+    transition: -webkit-transform .5s ease-in-out;
+    transition: transform .5s ease-in-out;
+    transition: transform .5s ease-in-out, -webkit-transform .5s ease-in-out;
+}
+#inputs > div > div > div {
+    -webkit-transform: rotateX(0deg);
+    transform: rotateX(0deg);
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+#inputs > div > div > div input:nth-child(2),
+#inputs > div > div > div > div input:nth-child(2) {
+    -webkit-transform: translateZ(-1px) rotateX(180deg);
+    transform: translateZ(-1px) rotateX(180deg);
+}
+#inputs > div > div > div > div {
+    -webkit-transform: translateY(-41px) rotateX(0deg);
+    transform: translateY(-41px) rotateX(0deg);
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
 
-    .btn-panel .btn:hover
-    {
-        color:#666;
-        background: #f8f8f8;
-    }
-    .btn-panel .btn:active
-    {
-        background: #f8f8f8;
-        box-shadow: 0 0 1px #ddd;
-    }
+input {
+    background: #FFFEFC;
+    border: 0;
+    box-sizing: border-box;
+    display: block;
+    font-family: Raleway, sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    margin: 0 auto;
+    padding: 13px;
+    text-transform: uppercase;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+    width: 300px;
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    -webkit-font-smoothing: antialiased;
+}
+input:hover {
+    background: #f3f3f3;
+}
+input:focus {
+    background: #EAEAEA;
+}
+input[type=submit] {
+    background: #43434C;
+    color: #FFFEFC;
+    cursor: pointer;
+}
+input[type=radio] {
+    display: none;
+}
 
-    .btn-panel-conversation .btn,.btn-panel-msg .btn
-    {
+input:checked[value=reset] ~ #inputs {
+    height: 84px;
+}
+input:checked[value=reset] ~ #labels {
+    margin-top: -10px;
+}
+input:checked[value=reset] ~ #inputs div > div > div {
+    -webkit-transform: rotateX(180deg);
+    transform: rotateX(180deg);
+}
+input:checked[value=reset] ~ #inputs div > div > div > div {
+    -webkit-transform: translateY(-41px) rotateX(180deg);
+    transform: translateY(-41px) rotateX(180deg);
+}
+input:checked[value=reset] ~ #labels label[for=reset],
+input:checked[value=reset] ~ #labels label[for=register],
+input:checked[value=reset] ~ #labels label[for=login]:first-child {
+    -webkit-transition: opacity .5s;
+    transition: opacity .5s;
+    opacity: 0;
+}
+input:checked[value=register] ~ #inputs {
+    height: 170px;
+}
+input:checked[value=register] ~ #labels {
+    margin-top: 30px;
+}
+input:checked[value=register] ~ #labels label[for=reset],
+input:checked[value=register] ~ #labels label[for=register],
+input:checked[value=register] ~ #labels label[for=login]:nth-child(3) {
+    -webkit-transition: opacity .5s;
+    transition: opacity .5s;
+    opacity: 0;
+}
+input:checked[value=login] ~ #labels {
+    margin-top: 11px;
+}
+input:checked[value=login] ~ #inputs div > div > div > div {
+    -webkit-transform: translateY(-41px) rotateX(180deg);
+    transform: translateY(-41px) rotateX(180deg);
+}
+input:checked[value=login] ~ #labels label[for=login] {
+    -webkit-transition: opacity .5s;
+    transition: opacity .5s;
+    opacity: 0;
+}
 
-        background: #f8f8f8;
-    }
-    .btn-panel-conversation .btn:first-child
-    {
-        border-right: 1px solid #ddd;
-    }
+#labels {
+    -webkit-transition: margin .5s ease-in-out;
+    transition: margin .5s ease-in-out;
+}
 
-    .msg-wrap .media-heading
-    {
-        color:#003bb3;
-        font-weight: 700;
-    }
+label {
+    display: block;
+    font-size: 14px;
+    color: #43434C;
+    margin-bottom: 5px;
+    font-weight: 600;
+    height: 16px;
+    -webkit-transition: opacity 1s .3s;
+    transition: opacity 1s .3s;
+    overflow: hidden;
+}
+label span {
+    cursor: pointer;
+    color: #349E97;
+}
 
-
-    .msg-date
-    {
-        background: none;
-        text-align: center;
-        color:#aaa;
-        border:none;
-        box-shadow: none;
-        border-bottom: 1px solid #ddd;
-    }
-
-
-    body::-webkit-scrollbar {
-        width: 12px;
-    }
-
-
-    /* Let's get this party started */
-    ::-webkit-scrollbar {
-        width: 6px;
-    }
-
-    /* Track */
-    ::-webkit-scrollbar-track {
-        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-        /*        -webkit-border-radius: 10px;
-                border-radius: 10px;*/
-    }
-
-    /* Handle */
-    ::-webkit-scrollbar-thumb {
-        /*        -webkit-border-radius: 10px;
-                border-radius: 10px;*/
-        background:#ddd;
-        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
-    }
-    ::-webkit-scrollbar-thumb:window-inactive {
-        background: #ddd;
-    }
-
+#hint {
+    position: absolute;
+    bottom: 20px;
+    opacity: .2;
+    left: 50%;
+    margin: 0 -62px;
+    font-weight: 600;
+}
 </style>
-<div class="container" id="nickWrap">
 
-    <div class = "container">
-        <div class="wrapper">
-            <form action="" method="post" name="Login_Form" id="setNick" class="form-signin">
-                <h3 class="form-signin-heading">Авторизация</h3>
-                <hr class="colorgraph"><br>
+<div id="nickWrap">
+    <h1>CHAT</h1>
+    <h2>KOZHUKHOVSKIY</h2>
+    <form action="" method="post" name="Login_Form" id="setNick">
+        <div id="inputs">
 
-                <input type="text" class="form-control" name="Username" id="n" placeholder="Ник" required="" autofocus />
+            <input type="text" placeholder="Nickname" id="n" >
+            <input type="submit" value="login">
 
 
-                <button id="logB" class="btn btn-lg btn-primary btn-block"  name="Submit" value="Login" type="Submit">Войти</button>
-            </form>
         </div>
-    </div>
+        <div id="labels">
+            <label>GitHub <a href="https://github.com/kozhyx">Click!</a></label>
+        </div>
+    </form>
 </div>
-<div class="container" id="contentWrap">
 
-    <div class="row">
+<div id="contentWrap">
 
-        <div class="conversation-wrap col-lg-3" id="users">
+    <div class="chat_window"><div class="top_menu"><div class="buttons">
+        <div class="button close"></div>
+        <div class="button minimize"></div>
+        <div class="button maximize"></div>
+    </div><div class="title">Chat</div>
+    </div><ul class="messages" id="messages">
 
-
-            <div class="media conversation">
-                <a class="pull-left" href="#">
-                    <img class="media-object" data-src="holder.js/64x64" alt="64x64" style="width: 50px; height: 50px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACqUlEQVR4Xu2Y60tiURTFl48STFJMwkQjUTDtixq+Av93P6iBJFTgg1JL8QWBGT4QfDX7gDIyNE3nEBO6D0Rh9+5z9rprr19dTa/XW2KHl4YFYAfwCHAG7HAGgkOQKcAUYAowBZgCO6wAY5AxyBhkDDIGdxgC/M8QY5AxyBhkDDIGGYM7rIAyBgeDAYrFIkajEYxGIwKBAA4PDzckpd+322243W54PJ5P5f6Omh9tqiTAfD5HNpuFVqvFyckJms0m9vf3EY/H1/u9vb0hn89jsVj8kwDfUfNviisJ8PLygru7O4TDYVgsFtDh9Xo9NBrNes9cLgeTybThgKenJ1SrVXGf1WoVDup2u4jFYhiPx1I1P7XVBxcoCVCr1UBfTqcTrVYLe3t7OD8/x/HxsdiOPqNGo9Eo0un02gHkBhJmuVzC7/fj5uYGXq8XZ2dnop5Mzf8iwMPDAxqNBmw2GxwOBx4fHzGdTpFMJkVzNB7UGAmSSqU2RoDmnETQ6XQiOyKRiHCOSk0ZEZQcUKlU8Pz8LA5vNptRr9eFCJQBFHq//szG5eWlGA1ywOnpqQhBapoWPfl+vw+fzweXyyU+U635VRGUBOh0OigUCggGg8IFK/teXV3h/v4ew+Hwj/OQU4gUq/w4ODgQrkkkEmKEVGp+tXm6XkkAOngmk4HBYBAjQA6gEKRmyOL05GnR99vbW9jtdjEGdP319bUIR8oA+pnG5OLiQoghU5OElFlKAtCGr6+vKJfLmEwm64aosd/XbDbbyIBSqSSeNKU+HXzlnFAohKOjI6maMs0rO0B20590n7IDflIzMmdhAfiNEL8R4jdC/EZIJj235R6mAFOAKcAUYApsS6LL9MEUYAowBZgCTAGZ9NyWe5gCTAGmAFOAKbAtiS7TB1Ng1ynwDkxRe58vH3FfAAAAAElFTkSuQmCC">
-                </a>
-                <div class="media-body">
-                    <h5 class="media-heading">Naimish Sakhpara</h5>
-                    <small>Hello</small>
-                </div>
+    </ul>
+        <div class="bottom_wrapper clearfix">
+            <div class="message_input_wrapper">
+                <input class="message_input" id="m" placeholder="Write here..." autofocus/>
             </div>
+            <div class="send_message">
 
+                <div class="icon" >
 
+                </div>
+                <div class="text" id="sendik">Send</div>
+            </div>
+        </div><
+        /div>
+        <div class="message_template">
+            <li class="message">
+                <div class="avatar">
 
+                </div>
+                <div class="text_wrapper">
+                    <div class="text">
 
-
-
-
-
-        </div>
-
-
-
-        <div class="message-wrap col-lg-8">
-            <div id="messages" class="msg-wrap">
-
-
-                <div class="media msg ">
-                        <div class="media-body">
-                        <small class="pull-right time"><i class="fa fa-clock-o"></i>Сегодня</small>
-                        <h5 class="media-heading">Admin</h5>
-                        <small class="col-lg-10">Не материмся</small>
                     </div>
                 </div>
-
-
-
-
-
-
-            </div>
-            <form id="message">
-                <div class="col-lg-6">
-                    <div class="input-group">
-                        <input type="text" id="m" class="form-control" placeholder="Сообщение..." aria-label="Search for...">
-                        <span class="input-group-btn">
-        <button class="btn btn-secondary" type="submit">Go!</button>
-      </span>
-                    </div>
-                </div>
-            </form>
+            </li>
         </div>
+
     </div>
 </div>
+
 
 <script src="/socket.io/socket.io.js"></script>
 <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
 <script src="node_modules/bootstrap/dist/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
 <script>
     $(function () {
         var socket = io();
         var $nickForm = $('#setNick');
+        var $sendik = $('#sendik');
         var $nickBox = $('#n');
         var $users = $('#users');
         $nickForm.submit(function (e) {
@@ -318,7 +461,7 @@
                 if(data){
                     $('#nickWrap').hide();
                     $('#contentWrap').show();
-                    hello();
+
                 }
                 else{
                     alert("Nick alredey taken");
@@ -343,28 +486,43 @@
             }
 
         });
-        $('#message').submit(function(){
-            socket.emit('chat message', $('#m').val());
-            $('#m').val('');
-            return false;
-        });
+            $('#sendik').click(function () {
+                socket.emit('chat message', $('#m').val());
+                $('#m').val('');
+                return false;
+            });
+
+
+
         socket.on('chat message', function(msg){
             var today = new Date();
             var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-            $('#messages').append("<div class=\"media msg\">\n" +
-                "\n" +
-                "                    <div class=\"media-body\">\n" +
-                "                        <small class=\"pull-right time\"><i class=\"fa fa-clock-o\"></i>"+date+"</small>\n" +
-                "\n" +
-                "                        <h5 class=\"media-heading\">"+msg.nickname+"</h5>\n" +
-                "                        <small class=\"col-lg-10\">"+msg.data+"</small>\n" +
-                "                    </div>\n" +
-                "                </div>");
+            $('#messages').append("  <li class=\"message left appeared\">\n" +
+                "            <div class=\"avatar\"></div>\n" +
+                "            <div class=\"text_wrapper\">\n" +
+                "               <small class=\" text-muted\">"+msg.nickname+"</small>" +
+                "<small class=\" pull-right text-muted\">"+date+"</small>" +
+                " <div class=\"text\">"+msg.data+"</div>\n" +
+                "            </div></li>");
+
             var objDiv = document.getElementById("messages");
             objDiv.scrollTop = objDiv.scrollHeight;
 
         });
     });
+
+
+</script>
+<script>
+    var $sendik = $('#sendik');
+    var $con = $('#contentWrap')
+
+    $(document).keypress(function(e) {
+        if($con.is(':visible') && e.which == 13) {
+            $('#sendik').click();
+        }
+    });
+
 </script>
 </body>
 </html>
