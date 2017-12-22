@@ -33,7 +33,9 @@ io.on('connection', function(socket){
     }
 
     socket.on('chat message', function(msg){
+
         io.emit('chat message', {data:msg,nickname:socket.nickname});
+
     });
     socket.on('disconnect',function (data) {
         if (!socket.nickname) return;

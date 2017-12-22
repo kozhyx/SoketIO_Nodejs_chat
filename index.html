@@ -17,6 +17,7 @@ html, body {
     margin: 0;
 }
 #contentWrap{display: none}
+
 .chat_window {
     position: absolute;
     width: calc(100% - 20px);
@@ -53,8 +54,16 @@ html, body {
 .top_menu .buttons .button.close {
     background-color: #f5886e;
 }
-.top_menu .buttons .button.minimize {
+#yellow{
+    background-color:#fdbf68 ;
+}
+#green
+{
+    background-color: #a3d063;
+}
+.top_menu .buttons .button.minimize. {
     background-color: #fdbf68;
+
 }
 .top_menu .buttons .button.maximize {
     background-color: #a3d063;
@@ -149,7 +158,14 @@ html, body {
     font-size: 18px;
     font-weight: 300;
 }
-
+::-webkit-scrollbar {
+    width: 0px;  /* remove scrollbar space */
+    background: transparent;  /* optional: just make scrollbar invisible */
+}
+/* optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+    background: #fbfff4;
+}
 .bottom_wrapper {
     position: relative;
     width: 100%;
@@ -168,6 +184,7 @@ html, body {
     padding: 0 20px;
 }
 .bottom_wrapper .message_input_wrapper .message_input {
+
     border: none;
     height: 100%;
     box-sizing: border-box;
@@ -393,7 +410,7 @@ label span {
         <div id="inputs">
 
             <input type="text" placeholder="Nickname" id="n" >
-            <input type="submit" value="login">
+            <input type="submit" onclick="setu()" value="login">
 
 
         </div>
@@ -405,17 +422,19 @@ label span {
 
 <div id="contentWrap">
 
-    <div class="chat_window"><div class="top_menu"><div class="buttons">
-        <div class="button close"></div>
-        <div class="button minimize"></div>
-        <div class="button maximize"></div>
+    <div class="chat_window"><div class="top_menu">
+       <div class="buttons">
+
+        <div class="button close" id="red"></div>
+        <div class="button close" id="yellow"></div>
+        <div class="button close" id="green"></div>
     </div><div class="title">Chat</div>
     </div><ul class="messages" id="messages">
 
     </ul>
         <div class="bottom_wrapper clearfix">
             <div class="message_input_wrapper">
-                <input class="message_input" id="m" placeholder="Write here..." autofocus/>
+                <input class="message_input" id="m" style="background-color: white" placeholder="Write here..." autofocus/>
             </div>
             <div class="send_message">
 
@@ -449,6 +468,7 @@ label span {
 <script src="node_modules/bootstrap/dist/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 
 <script>
+    var coloral = "#ffe6cb";
     $(function () {
         var socket = io();
         var $nickForm = $('#setNick');
@@ -486,8 +506,10 @@ label span {
             }
 
         });
+        var a="";
             $('#sendik').click(function () {
-                socket.emit('chat message', $('#m').val());
+                a = "left"
+                socket.emit('chat message', $('#m').val(),a);
                 $('#m').val('');
                 return false;
             });
@@ -496,18 +518,30 @@ label span {
 
         socket.on('chat message', function(msg){
             var today = new Date();
+
             var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-            $('#messages').append("  <li class=\"message left appeared\">\n" +
-                "            <div class=\"avatar\"></div>\n" +
-                "            <div class=\"text_wrapper\">\n" +
-                "               <small class=\" text-muted\">"+msg.nickname+"</small>" +
-                "<small class=\" pull-right text-muted\">"+date+"</small>" +
-                " <div class=\"text\">"+msg.data+"</div>\n" +
-                "            </div></li>");
+            if(a=="left")
+            {
+                $('#messages').append("  <li class=\"message left appeared\">\n" +
+                    "            <div class=\"avatar\"></div>\n" +
+                    "            <div class=\"text_wrapper\" style='background:" + coloral + "'>\n" +
+                    "               <small class=\" text-muted\">" + msg.nickname + "</small>" +
+                    "<small class=\" pull-right text-muted\">" + date + "</small>" +
+                    " <div class=\"text\">" + msg.data + "</div>\n" +
+                    "            </div></li>");
+            }else {
+                $('#messages').append("  <li class=\"message right appeared\">\n" +
+                    "            <div class=\"avatar\"></div>\n" +
+                    "            <div class=\"text_wrapper\" style='background:#c7eafc'>\n" +
+                    "               <small class=\" text-muted\">" + msg.nickname + "</small>" +
+                    "<small class=\" pull-right text-muted\">" + date + "</small>" +
+                    " <div class=\"text\">" + msg.data + "</div>\n" +
+                    "            </div></li>");
+            }
 
             var objDiv = document.getElementById("messages");
             objDiv.scrollTop = objDiv.scrollHeight;
-
+            a="";
         });
     });
 
@@ -524,5 +558,36 @@ label span {
     });
 
 </script>
+<script>
+
+    var $red = $('#red');
+    var $green = $('#green');
+    var $yellow = $('#yellow');
+    $('#red').click(function () {
+        coloral = "#f1d5ce";
+        var redik = document.getElementsByClassName('text_wrapper');
+        for (var i = 0; i < redik.length; i++) {
+            redik[i].style.background = "#f1d5ce";
+        }
+    });
+    $('#green').click(function () {
+        coloral = "#e5ffc0";
+        var redik = document.getElementsByClassName('text_wrapper');
+        for (var i = 0; i < redik.length; i++) {
+            redik[i].style.background = "#e5ffc0";
+        }
+    });
+    $('#yellow').click(function () {
+        coloral = "#fde3be";
+        var redik = document.getElementsByClassName('text_wrapper');
+        for (var i = 0; i < redik.length; i++) {
+            redik[i].style.background = "#fde3be";
+        }
+    });
+
+
+
+</script>
+
 </body>
 </html>
