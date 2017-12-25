@@ -10,402 +10,16 @@
           integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 </head>
 <body>
+<link rel="stylesheet" href="/public/main.css">
+<link rel="stylesheet" href="/public/but3d.css">
 <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 <style class="cp-pen-styles">@import url(https://fonts.googleapis.com/css?family=Raleway:400,700);
-html, body {
-    height: 100%;
-    margin: 0;
-}
-#contentWrap{display: none}
 
-.chat_window {
-    position: absolute;
-    width: calc(100% - 20px);
-    max-width: 800px;
-    height: 500px;
-    border-radius: 10px;
-    background-color: #fff;
-    left: 50%;
-    top: 50%;
-    transform: translateX(-50%) translateY(-50%);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-    background-color: #f8f8f8;
-    overflow: hidden;
-}
-
-.top_menu {
-    background-color: #fff;
-    width: 100%;
-    padding: 20px 0 15px;
-    box-shadow: 0 1px 30px rgba(0, 0, 0, 0.1);
-}
-.top_menu .buttons {
-    margin: 3px 0 0 20px;
-    position: absolute;
-}
-.top_menu .buttons .button {
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    display: inline-block;
-    margin-right: 10px;
-    position: relative;
-}
-.top_menu .buttons .button.close {
-    background-color: #f5886e;
-}
-#yellow{
-    background-color:#fdbf68 ;
-}
-#green
-{
-    background-color: #a3d063;
-}
-.top_menu .buttons .button.minimize. {
-    background-color: #fdbf68;
-
-}
-.top_menu .buttons .button.maximize {
-    background-color: #a3d063;
-}
-.top_menu .title {
-    text-align: center;
-    color: #bcbdc0;
-    font-size: 20px;
-}
-
-.messages {
-    position: relative;
-    list-style: none;
-    padding: 20px 10px 0 10px;
-    margin: 0;
-    height: 347px;
-    overflow: scroll;
-}
-.messages .message {
-    clear: both;
-    overflow: hidden;
-    margin-bottom: 20px;
-    transition: all 0.5s linear;
-    opacity: 0;
-}
-.messages .message.left .avatar {
-    background-color: #f5886e;
-    float: left;
-}
-.messages .message.left .text_wrapper {
-    background-color: #ffe6cb;
-    margin-left: 20px;
-}
-.messages .message.left .text_wrapper::after, .messages .message.left .text_wrapper::before {
-    right: 100%;
-    border-right-color: #ffe6cb;
-}
-.messages .message.left .text {
-    color: #c48843;
-}
-.messages .message.right .avatar {
-    background-color: #fdbf68;
-    float: right;
-}
-.messages .message.right .text_wrapper {
-    background-color: #c7eafc;
-    margin-right: 20px;
-    float: right;
-}
-.messages .message.right .text_wrapper::after, .messages .message.right .text_wrapper::before {
-    left: 100%;
-    border-left-color: #c7eafc;
-}
-.messages .message.right .text {
-    color: #45829b;
-}
-.messages .message.appeared {
-    opacity: 1;
-}
-.messages .message .avatar {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    display: inline-block;
-}
-.messages .message .text_wrapper {
-    display: inline-block;
-    padding: 20px;
-    border-radius: 6px;
-    width: calc(100% - 85px);
-    min-width: 100px;
-    position: relative;
-}
-.messages .message .text_wrapper::after, .messages .message .text_wrapper:before {
-    top: 18px;
-    border: solid transparent;
-    content: " ";
-    height: 0;
-    width: 0;
-    position: absolute;
-    pointer-events: none;
-}
-.messages .message .text_wrapper::after {
-    border-width: 13px;
-    margin-top: 0px;
-}
-.messages .message .text_wrapper::before {
-    border-width: 15px;
-    margin-top: -2px;
-}
-.messages .message .text_wrapper .text {
-    font-size: 18px;
-    font-weight: 300;
-}
-::-webkit-scrollbar {
-    width: 0px;  /* remove scrollbar space */
-    background: transparent;  /* optional: just make scrollbar invisible */
-}
-/* optional: show position indicator in red */
-::-webkit-scrollbar-thumb {
-    background: #fbfff4;
-}
-.bottom_wrapper {
-    position: relative;
-    width: 100%;
-    background-color: #fff;
-    padding: 20px 20px;
-    position: absolute;
-    bottom: 0;
-}
-.bottom_wrapper .message_input_wrapper {
-    display: inline-block;
-    height: 50px;
-    border-radius: 25px;
-    border: 1px solid #bcbdc0;
-    width: calc(100% - 160px);
-    position: relative;
-    padding: 0 20px;
-}
-.bottom_wrapper .message_input_wrapper .message_input {
-
-    border: none;
-    height: 100%;
-    box-sizing: border-box;
-    width: calc(100% - 40px);
-    position: absolute;
-    outline-width: 0;
-    color: gray;
-}
-.bottom_wrapper .send_message {
-    width: 140px;
-    height: 50px;
-    display: inline-block;
-    border-radius: 50px;
-    background-color: #a3d063;
-    border: 2px solid #a3d063;
-    color: #fff;
-    cursor: pointer;
-    transition: all 0.2s linear;
-    text-align: center;
-    float: right;
-}
-.bottom_wrapper .send_message:hover {
-    color: #a3d063;
-    background-color: #fff;
-}
-.bottom_wrapper .send_message .text {
-    font-size: 18px;
-    font-weight: 300;
-    display: inline-block;
-    line-height: 48px;
-}
-
-.message_template {
-    display: none;
-}
-
-body {
-    font-family: 'Raleway', sans-serif;
-
-    color: #435757;
-    background: -webkit-linear-gradient(110deg, #d0b782 20%, #a0cecf 80%);
-    background: linear-gradient(-20deg, #d0b782 20%, #a0cecf 80%);
-    -webkit-font-smoothing: antialiased;
-}
-
-:focus {
-    outline: 0;
-}
-
-#nickWrap {
-    -webkit-perspective: 500px;
-    perspective: 500px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    text-align: center;
-    -webkit-transform: translate3d(-50%, -50%, 0);
-    transform: translate3d(-50%, -50%, 0);
-}
-
-h1 {
-    color: #416171;
-    font-size: 43px;
-    margin: 0;
-}
-
-h2 {
-    color: #349E97;
-    margin: 0;
-}
-
-form {
-    margin: 35px 0;
-}
-
-#inputs {
-    height: 127px;
-    -webkit-transition: height .5s ease-in-out;
-    transition: height .5s ease-in-out;
-}
-#inputs div {
-    height: 41px;
-    -webkit-transform-origin: 0 0;
-    transform-origin: 0 0;
-    -webkit-transition: -webkit-transform .5s ease-in-out;
-    transition: -webkit-transform .5s ease-in-out;
-    transition: transform .5s ease-in-out;
-    transition: transform .5s ease-in-out, -webkit-transform .5s ease-in-out;
-}
-#inputs > div > div > div {
-    -webkit-transform: rotateX(0deg);
-    transform: rotateX(0deg);
-    -webkit-transform-style: preserve-3d;
-    transform-style: preserve-3d;
-}
-#inputs > div > div > div input:nth-child(2),
-#inputs > div > div > div > div input:nth-child(2) {
-    -webkit-transform: translateZ(-1px) rotateX(180deg);
-    transform: translateZ(-1px) rotateX(180deg);
-}
-#inputs > div > div > div > div {
-    -webkit-transform: translateY(-41px) rotateX(0deg);
-    transform: translateY(-41px) rotateX(0deg);
-    -webkit-transform-style: preserve-3d;
-    transform-style: preserve-3d;
-}
-
-input {
-    background: #FFFEFC;
-    border: 0;
-    box-sizing: border-box;
-    display: block;
-    font-family: Raleway, sans-serif;
-    font-weight: 600;
-    font-size: 12px;
-    margin: 0 auto;
-    padding: 13px;
-    text-transform: uppercase;
-    -webkit-transition: all .2s ease-in-out;
-    transition: all .2s ease-in-out;
-    width: 300px;
-    -webkit-transform-origin: 0 0;
-    transform-origin: 0 0;
-    -webkit-font-smoothing: antialiased;
-}
-input:hover {
-    background: #f3f3f3;
-}
-input:focus {
-    background: #EAEAEA;
-}
-input[type=submit] {
-    background: #43434C;
-    color: #FFFEFC;
-    cursor: pointer;
-}
-input[type=radio] {
-    display: none;
-}
-
-input:checked[value=reset] ~ #inputs {
-    height: 84px;
-}
-input:checked[value=reset] ~ #labels {
-    margin-top: -10px;
-}
-input:checked[value=reset] ~ #inputs div > div > div {
-    -webkit-transform: rotateX(180deg);
-    transform: rotateX(180deg);
-}
-input:checked[value=reset] ~ #inputs div > div > div > div {
-    -webkit-transform: translateY(-41px) rotateX(180deg);
-    transform: translateY(-41px) rotateX(180deg);
-}
-input:checked[value=reset] ~ #labels label[for=reset],
-input:checked[value=reset] ~ #labels label[for=register],
-input:checked[value=reset] ~ #labels label[for=login]:first-child {
-    -webkit-transition: opacity .5s;
-    transition: opacity .5s;
-    opacity: 0;
-}
-input:checked[value=register] ~ #inputs {
-    height: 170px;
-}
-input:checked[value=register] ~ #labels {
-    margin-top: 30px;
-}
-input:checked[value=register] ~ #labels label[for=reset],
-input:checked[value=register] ~ #labels label[for=register],
-input:checked[value=register] ~ #labels label[for=login]:nth-child(3) {
-    -webkit-transition: opacity .5s;
-    transition: opacity .5s;
-    opacity: 0;
-}
-input:checked[value=login] ~ #labels {
-    margin-top: 11px;
-}
-input:checked[value=login] ~ #inputs div > div > div > div {
-    -webkit-transform: translateY(-41px) rotateX(180deg);
-    transform: translateY(-41px) rotateX(180deg);
-}
-input:checked[value=login] ~ #labels label[for=login] {
-    -webkit-transition: opacity .5s;
-    transition: opacity .5s;
-    opacity: 0;
-}
-
-#labels {
-    -webkit-transition: margin .5s ease-in-out;
-    transition: margin .5s ease-in-out;
-}
-
-label {
-    display: block;
-    font-size: 14px;
-    color: #43434C;
-    margin-bottom: 5px;
-    font-weight: 600;
-    height: 16px;
-    -webkit-transition: opacity 1s .3s;
-    transition: opacity 1s .3s;
-    overflow: hidden;
-}
-label span {
-    cursor: pointer;
-    color: #349E97;
-}
-
-#hint {
-    position: absolute;
-    bottom: 20px;
-    opacity: .2;
-    left: 50%;
-    margin: 0 -62px;
-    font-weight: 600;
-}
 </style>
 
 <div id="nickWrap">
     <h1>CHAT</h1>
-    <h2>KOZHUKHOVSKIY</h2>
+    <h2>Your LOGO</h2>
     <form action="" method="post" name="Login_Form" id="setNick">
         <div id="inputs">
 
@@ -415,7 +29,7 @@ label span {
 
         </div>
         <div id="labels">
-            <label>GitHub <a href="https://github.com/kozhyx">Click!</a></label>
+
         </div>
     </form>
 </div>
@@ -434,7 +48,7 @@ label span {
     </ul>
         <div class="bottom_wrapper clearfix">
             <div class="message_input_wrapper">
-                <input class="message_input" id="m" style="background-color: white" placeholder="Write here..." autofocus/>
+                <input class="message_input" id="m" style="background-color: white" placeholder="Write here..." autofocus autocomplete="off"/>
             </div>
             <div class="send_message">
 
@@ -508,9 +122,14 @@ label span {
         });
         var a="";
             $('#sendik').click(function () {
+                setTimeout(10000);
+
+                var audio = document.getElementById("audio");
+                audio.play();
                 a = "left"
                 socket.emit('chat message', $('#m').val(),a);
                 $('#m').val('');
+
                 return false;
             });
 
@@ -588,6 +207,6 @@ label span {
 
 
 </script>
-
+<audio id="audio" src="public/tyk.mp3" ></audio>
 </body>
 </html>
